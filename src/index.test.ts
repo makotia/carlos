@@ -15,13 +15,18 @@ describe("Worker", () => {
     await worker.stop();
   });
 
-  it("GET: 410 Gone が返ってくる", async () => {
-    const resp = await worker.fetch();
-    expect(resp.status).toBe(410);
-  });
+  // 上をまとめたい
+  it.each(["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"])(
+    "%s: 410 Gone が返ってくる",
+    async (method) => {
+      const resp = await worker.fetch("/", { method });
+      expect(resp.status).toBe(410);
+    }
+  );
 
-  it("POST: 410 Gone が返ってくる", async () => {
-    const resp = await worker.fetch("/", { method: "POST" });
+  it("どんなパスでも 410 Gone が返ってくる", async () => {
+    const random = Math.random().toString(36).slice(2);
+    const resp = await worker.fetch(`/${random}`);
     expect(resp.status).toBe(410);
   });
 });
