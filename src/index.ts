@@ -28,6 +28,6 @@ export default {
     env: Env,
     ctx: ExecutionContext
   ): Promise<Response> {
-    return new Response("Gone", { status: 510 });
+    return new Response("Gone", { status: 410 });
   },
 };

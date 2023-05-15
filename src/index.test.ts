@@ -15,13 +15,13 @@ describe("Worker", () => {
     await worker.stop();
   });
 
-  it("GET: 510 Gone が返ってくる", async () => {
+  it("GET: 410 Gone が返ってくる", async () => {
     const resp = await worker.fetch();
-    expect(resp.status).toBe(510);
+    expect(resp.status).toBe(410);
   });
 
-  it("POST: 510 Gone が返ってくる", async () => {
+  it("POST: 410 Gone が返ってくる", async () => {
     const resp = await worker.fetch("/", { method: "POST" });
-    expect(resp.status).toBe(510);
+    expect(resp.status).toBe(410);
   });
 });
